@@ -21,3 +21,14 @@ $router->group(['prefix'=>'auth'], function () use ($router){
     $router->post('/register', 'AuthController@register');
     $router->post('/login', 'AuthController@login');
 });
+
+$router->group(['prefix'=>'master'], function () use ($router){
+    $router->group(['prefix'=>'article'], function () use ($router){
+        $router->get('/', 'ArticlesController@index');
+        $router->get('/{id}', 'ArticlesController@detail');
+        $router->get('/category/{id}', 'ArticlesController@show');
+        $router->post('/insert', 'ArticlesController@store');
+        $router->put('/update/{id}', 'ArticlesController@update');
+        $router->delete('/delete/{id}', 'ArticlesController@destroy');
+    });
+});
