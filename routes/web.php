@@ -31,4 +31,11 @@ $router->group(['prefix'=>'master'], function () use ($router){
         $router->put('/update/{id}', 'ArticlesController@update');
         $router->delete('/delete/{id}', 'ArticlesController@destroy');
     });
+    $router->group(['prefix'=>'bantuan'], function () use ($router){
+        $router->get('/', 'BantuansController@index');
+        $router->get('/{id}', 'BantuansController@show');
+        $router->post('/insert', 'BantuansController@store');
+        $router->put('/update/{id}', 'BantuansController@update');
+        $router->delete('/delete/{id}', 'BantuansController@destroy');
+    });
 });
