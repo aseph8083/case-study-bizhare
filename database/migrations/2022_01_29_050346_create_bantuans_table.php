@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArticleTypeTable extends Migration
+class CreateBantuansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateArticleTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('article_type', function (Blueprint $table) {
+        Schema::create('bantuans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('article_id')->index('article_id_foreign');
-            $table->integer('type_id')->index('type_id_foreign');
+            $table->string('name', 100);
+            $table->text('description', 65535);
+            $table->enum('type',array('FAQ','Bantuan'));
+            $table->integer('user_id')->index('user_id_foreign');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +30,6 @@ class CreateArticleTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('article_types');
+        Schema::dropIfExists('bantuans');
     }
 }
