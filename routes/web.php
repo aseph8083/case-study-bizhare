@@ -12,18 +12,17 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix'=>'auth'], function () use ($router){
+$router->group(['prefix' => 'auth'], function () use ($router) {
     $router->post('/register', 'AuthController@register');
     $router->post('/login', 'AuthController@login');
 });
 
-$router->group(['prefix'=>'master'], function () use ($router){
-    $router->group(['prefix'=>'article'], function () use ($router){
+$router->group(['prefix' => 'master'], function () use ($router) {
+    $router->group(['prefix' => 'article'], function () use ($router) {
         $router->get('/', 'ArticlesController@index');
         $router->get('/{id}', 'ArticlesController@detail');
         $router->get('/category/{id}', 'ArticlesController@show');
@@ -31,12 +30,32 @@ $router->group(['prefix'=>'master'], function () use ($router){
         $router->put('/update/{id}', 'ArticlesController@update');
         $router->delete('/delete/{id}', 'ArticlesController@destroy');
     });
-    $router->group(['prefix'=>'bantuan'], function () use ($router){
+    $router->group(['prefix' => 'bantuan'], function () use ($router) {
         $router->get('/', 'BantuansController@index');
         $router->get('/{id}', 'BantuansController@show');
         $router->post('/insert', 'BantuansController@store');
         $router->put('/update/{id}', 'BantuansController@update');
         $router->delete('/delete/{id}', 'BantuansController@destroy');
+    });
+
+    $router->group(['prefix' => 'slide'], function () use ($router) {
+        $router->get('/', 'SlideController@index');
+        $router->get('/{id}', 'SlideController@show');
+        $router->post('/insert', 'SlideController@store');
+        $router->post('/update/{id}', 'SlideController@update');
+        $router->delete('/delete/{id}', 'SlideController@destroy');
+    });
+
+    $router->group(['prefix' => 'saldo'], function () use ($router) {
+        $router->get('/', 'SaldoController@index');
+        $router->get('/{id}', 'SaldoController@show');
+    });
+
+    $router->group(['prefix' => 'profile'], function () use ($router) {
+        $router->get('/', 'ProfilController@index');
+        $router->get('/{id}', 'ProfilController@show');
+        $router->put('/ganti-password/{id}', 'ProfilController@changepassword');
+        $router->put('/updateprof/{id}', 'ProfilController@updateprof');
     });
 });
 
@@ -79,8 +98,3 @@ $router->group(['prefix'=>'investasi'], function () use ($router){
     $router->get('/', 'PortofolioTransactionController@index');
     $router->get('/{id}', 'PortofolioTransactionController@show');
 });
-
-
-
-
-
