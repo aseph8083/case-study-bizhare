@@ -39,3 +39,48 @@ $router->group(['prefix'=>'master'], function () use ($router){
         $router->delete('/delete/{id}', 'BantuansController@destroy');
     });
 });
+
+$router->group(['prefix'=>'admin'], function () use ($router){
+    $router->group(['prefix'=>'bisnis'], function () use ($router){
+        $router->post('/insert', 'BusinesssController@store');
+        $router->put('/update/{id}', 'BusinesssController@update');
+        $router->delete('/delete/{id}', 'BusinesssController@destroy');
+    });
+    $router->group(['prefix'=>'categories'], function () use ($router){
+        $router->get('/', 'BusinessCategoriesController@index');
+        $router->get('/{id}', 'BusinessCategoriesController@show');
+        $router->post('/insert', 'BusinessCategoriesController@store');
+        $router->put('/update/{id}', 'BusinessCategoriesController@update');
+        $router->delete('/delete/{id}', 'BusinessCategoriesController@destroy');
+    });
+    $router->group(['prefix'=>'portofolio'], function () use ($router){
+        $router->post('/insert', 'PortofolioController@store');
+        $router->put('/update/{id}', 'PortofolioController@update');
+        $router->delete('/delete/{id}', 'PortofolioController@destroy');
+    });
+    $router->group(['prefix'=>'investasi'], function () use ($router){
+        $router->post('/insert', 'PortofolioTransactionController@store');
+        $router->put('/update/{id}', 'PortofolioTransactionController@update');
+        $router->delete('/delete/{id}', 'PortofolioTransactionController@destroy');
+    });
+});
+
+$router->group(['prefix'=>'bisnis'], function () use ($router){
+    $router->get('/', 'BusinesssController@index');
+    $router->get('/{id}', 'BusinesssController@show');
+});
+
+$router->group(['prefix'=>'portofolio'], function () use ($router){
+    $router->get('/', 'PortofolioController@index');
+    $router->get('/{id}', 'PortofolioController@show');
+});
+
+$router->group(['prefix'=>'investasi'], function () use ($router){
+    $router->get('/', 'PortofolioTransactionController@index');
+    $router->get('/{id}', 'PortofolioTransactionController@show');
+});
+
+
+
+
+
